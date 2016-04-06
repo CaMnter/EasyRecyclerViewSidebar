@@ -41,26 +41,30 @@ public class EasyRecyclerViewSidebar extends View {
 
     public EasyRecyclerViewSidebar(Context context) {
         super(context);
+        this.init(context, null);
     }
 
 
     public EasyRecyclerViewSidebar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.init(context, attrs);
     }
 
 
     public EasyRecyclerViewSidebar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.init(context, attrs);
     }
 
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public EasyRecyclerViewSidebar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        this.init(context, attrs);
     }
 
 
-    private void init(Context context) {
+    private void init(Context context, AttributeSet attrs) {
         this.sectionFontSize = this.sp2px(context, DEFAULT_FONT_SIZE);
         this.paint = new Paint();
         this.paint.setAntiAlias(true);
@@ -95,7 +99,7 @@ public class EasyRecyclerViewSidebar extends View {
         if (this.sections == null || this.sections.length < 1) return super.onTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                this.setBackgroundColor(DEFAULT_FONT_COLOR);
+                this.setBackgroundColor(DEFAULT_VIEW_BACKGROUND);
                 this.floatView.setVisibility(VISIBLE);
                 this.showFloatView(event);
                 return true;
