@@ -20,7 +20,7 @@ public class EasyRecyclerViewSidebar extends View {
 
     private static final int DEFAULT_VIEW_BACKGROUND = 0x40000000;
     private static final int DEFAULT_FONT_COLOR = 0xff444444;
-    private static final int DEFAULT_FONT_SIZE = 10;
+    private static final int DEFAULT_FONT_SIZE = 14;
 
     private static final int MAX_SECTION_COUNT = 30;
 
@@ -84,7 +84,7 @@ public class EasyRecyclerViewSidebar extends View {
             this.allSectionHeight = this.sectionHeight * this.sections.length;
             float top = this.viewHeight / 2 - allSectionHeight / 2 + this.sectionHeight / 2 -
                     this.sectionFontSize / 2;
-            for (int i = 1; i <= this.sections.length; i++) {
+            for (int i = 0; i < this.sections.length; i++) {
                 canvas.drawText(sections[i], this.viewHalfWidth, top + this.sectionHeight * i,
                         paint);
             }
@@ -149,6 +149,11 @@ public class EasyRecyclerViewSidebar extends View {
     private int sp2px(Context context, float sp) {
         float density = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * density + 0.5F);
+    }
+
+
+    public void setSections(String[] sections) {
+        this.sections = sections;
     }
 
 
