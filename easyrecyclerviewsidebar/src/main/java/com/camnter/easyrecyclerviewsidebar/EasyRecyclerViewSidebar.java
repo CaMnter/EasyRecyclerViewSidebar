@@ -10,6 +10,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import com.camnter.easyrecyclerviewsidebar.sections.EasyImageSection;
+import com.camnter.easyrecyclerviewsidebar.sections.EasySection;
+import java.util.ArrayList;
 
 /**
  * Description：EasyRecyclerViewSidebar
@@ -34,7 +37,7 @@ public class EasyRecyclerViewSidebar extends View {
     private int viewHeight;
     private int viewHalfWidth;
 
-    private String[] sections;
+    private ArrayList<EasySection> sections;
 
     private OnTouchSectionListener onTouchSectionListener;
 
@@ -71,6 +74,7 @@ public class EasyRecyclerViewSidebar extends View {
         this.paint.setTextAlign(Paint.Align.CENTER);
         this.paint.setColor(DEFAULT_FONT_COLOR);
         this.paint.setTextSize(this.sectionFontSize);
+        this.sections = new ArrayList<>();
     }
 
 
@@ -80,13 +84,18 @@ public class EasyRecyclerViewSidebar extends View {
         this.viewHeight = this.getHeight();
         this.viewHalfWidth = this.viewWidth / 2;
         this.sectionHeight = this.viewHeight / MAX_SECTION_COUNT;
-        if (this.sections != null && this.sections.length > 0) {
-            this.allSectionHeight = this.sectionHeight * this.sections.length;
+        if (this.sections.size() > 0) {
+            this.allSectionHeight = this.sectionHeight * this.sections.size();
             float top = this.viewHeight / 2 - allSectionHeight / 2 + this.sectionHeight / 2 -
                     this.sectionFontSize / 2;
-            for (int i = 0; i < this.sections.length; i++) {
-                canvas.drawText(sections[i], this.viewHalfWidth, top + this.sectionHeight * i,
-                        paint);
+            for (int i = 0; i < this.sections.size(); i++) {
+                EasySection section = this.sections.get(i);
+                if (section instanceof EasyImageSection) {
+
+                } else {
+                    canvas.drawText(section.description, this.viewHalfWidth,
+                            top + this.sectionHeight * i, this.paint);
+                }
             }
         } else {
             this.sectionHeight = 0;
@@ -96,7 +105,7 @@ public class EasyRecyclerViewSidebar extends View {
 
 
     @Override public boolean onTouchEvent(MotionEvent event) {
-        if (this.sections == null || this.sections.length < 1) return super.onTouchEvent(event);
+        if (this.sections == null || this.sections.size() < 1) return super.onTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 this.setBackgroundColor(DEFAULT_VIEW_BACKGROUND);
@@ -125,8 +134,8 @@ public class EasyRecyclerViewSidebar extends View {
         if (index <= 0) {
             return 0;
         }
-        if (index >= sections.length) {
-            index = this.sections.length - 1;
+        if (index >= this.sections.size()) {
+            index = this.sections.size() - 1;
         }
         return index;
     }
@@ -134,11 +143,15 @@ public class EasyRecyclerViewSidebar extends View {
 
     private void showFloatView(MotionEvent event) {
         int sectionIndex = this.getSectionIndex(event.getY());
-        if (this.sections == null || this.sections.length < 1 ||
-                sectionIndex >= this.sections.length) {
+        if (this.sections == null || this.sections.size() < 1 ||
+                sectionIndex >= this.sections.size()) {
             return;
         }
-        String floatText = this.sections[sectionIndex];
+        EasySection section = this.sections.get(sectionIndex);
+        String floatText = section.description;
+        if (section instanceof EasyImageSection) {
+
+        }
         this.floatView.setText(floatText);
         if (this.onTouchSectionListener != null) {
             this.onTouchSectionListener.onTouchSection(sectionIndex);
@@ -153,7 +166,10 @@ public class EasyRecyclerViewSidebar extends View {
 
 
     public void setSections(String[] sections) {
-        this.sections = sections;
+        this.sections.clear();
+        for (String section : sections) {
+            this.sections.add(new EasySection(section));
+        }
     }
 
 
