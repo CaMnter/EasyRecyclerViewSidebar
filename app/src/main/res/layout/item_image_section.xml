@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/section_header_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/section_header_tv_bg"
+        android:paddingBottom="4dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:textColor="@color/section_header_tv"
+        android:textSize="@dimen/add_friend_by_contacts_header_tv"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_image_section_item">
+
+        <ImageView
+            android:id="@+id/image_section_iv"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/img_default_head_circle"/>
+
+        <TextView
+            android:id="@+id/add_friend_by_contacts_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/image_section_iv"
+            android:layout_toRightOf="@id/image_section_iv"
+            android:textColor="@color/add_friend_name"
+            android:textSize="@dimen/add_friend_name"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/image_section_iv"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:background="#ffE5E5E5"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

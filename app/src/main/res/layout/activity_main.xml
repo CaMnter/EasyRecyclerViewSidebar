@@ -5,23 +5,9 @@
     android:layout_height="match_parent"
     tools:context="com.camnter.easyrecyclerviewsidebar.demo.MainActivity">
 
-    <com.camnter.easyrecyclerviewsidebar.EasyRecyclerViewSidebar
-        android:id="@+id/sidebar"
-        android:layout_width="30dp"
-        android:layout_height="fill_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="center|end"/>
-
-    <TextView
-        android:id="@+id/floating_tv"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/show_float_bg"
-        android:gravity="center"
-        android:textColor="#444444"
-        android:textSize="23sp"
-        android:visibility="invisible"/>
+    <com.camnter.easyrecyclerview.widget.EasyRecyclerView
+        android:id="@+id/main_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.camnter.easyrecyclerviewsidebar.demo.MainActivity">
+
+    <com.camnter.easyrecyclerviewsidebar.EasyRecyclerViewSidebar
+        android:id="@+id/image_section_sidebar"
+        android:layout_width="30dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center|end"/>
+
+    <TextView
+        android:id="@+id/image_section_floating_tv"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/show_float_bg"
+        android:gravity="center"
+        android:textColor="#444444"
+        android:textSize="23sp"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

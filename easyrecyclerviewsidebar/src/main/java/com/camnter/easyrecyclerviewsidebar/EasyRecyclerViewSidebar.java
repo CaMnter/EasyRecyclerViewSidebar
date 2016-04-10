@@ -46,7 +46,7 @@ public class EasyRecyclerViewSidebar extends View {
     private Paint letterPaint;
     private Paint imagePaint;
 
-    private TextView floatView;
+    private View floatView;
     private float sectionHeight;
     private float allSectionHeight;
     private float sectionFontSize;
@@ -224,13 +224,14 @@ public class EasyRecyclerViewSidebar extends View {
             return;
         }
         EasySection section = this.sections.get(sectionIndex);
-        String floatText = section.description;
-        if (section instanceof EasyImageSection) {
-
+        if (this.onTouchSectionListener == null) {
+            return;
         }
-        this.floatView.setText(floatText);
-        if (this.onTouchSectionListener != null) {
-            this.onTouchSectionListener.onTouchSection(sectionIndex);
+        if (section instanceof EasyImageSection) {
+            this.onTouchSectionListener.onTouchImageSection(sectionIndex,
+                    (EasyImageSection) section);
+        } else {
+            this.onTouchSectionListener.onTouchLetterSection(sectionIndex, section);
         }
     }
 
@@ -267,7 +268,6 @@ public class EasyRecyclerViewSidebar extends View {
 
     private Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) ((BitmapDrawable) drawable).getBitmap();
-
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();
         Bitmap bitmap = this.createBitmapSafely(width, height, Bitmap.Config.ARGB_8888, 1);
@@ -332,8 +332,8 @@ public class EasyRecyclerViewSidebar extends View {
     }
 
 
-    public TextView getFloatView() {
-        return floatView;
+    public View getFloatView() {
+        return this.floatView;
     }
 
 
@@ -354,10 +354,19 @@ public class EasyRecyclerViewSidebar extends View {
 
     public interface OnTouchSectionListener {
         /**
-         * On touch section
+         * On touch image section
          *
          * @param sectionIndex sectionIndex
+         * @param imageSection imageSection
          */
-        void onTouchSection(int sectionIndex);
+        void onTouchImageSection(int sectionIndex, EasyImageSection imageSection);
+
+        /**
+         * On touch letter section
+         *
+         * @param sectionIndex sectionIndex
+         * @param letterSection letterSection
+         */
+        void onTouchLetterSection(int sectionIndex, EasySection letterSection);
     }
 }
