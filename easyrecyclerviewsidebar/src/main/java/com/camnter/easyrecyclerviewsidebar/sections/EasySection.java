@@ -9,10 +9,10 @@ import android.support.annotation.NonNull;
  */
 public class EasySection {
 
-    public String description;
+    public String letter;
 
 
-    public EasySection(@NonNull String description) {
-        this.description = description;
+    public EasySection(@NonNull String letter) {
+        this.letter = letter;
     }
 }

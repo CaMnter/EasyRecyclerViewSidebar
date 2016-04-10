@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2016 CaMnter yuanyu.camnter@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,23 @@
 
 package com.camnter.easyrecyclerviewsidebar;
 
-public interface EasySectionIndexer {
+import com.camnter.easyrecyclerviewsidebar.sections.EasySection;
+import java.util.List;
+
+/**
+ * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2016 CaMnter yuanyu.camnter@gmail.com
+ *
+ * Modified by 2016 CaMnter yuanyu.camnter@gmail.com
+ *
+ * Description：EasyRecyclerViewSidebar
+ * Created by：CaMnter
+ * Time：2016-04-10 21:18
+ *
+ * @param <T> T
+ */
+public interface EasyRecyclerSectionIndexer<T extends EasySection> {
+
     /**
      * Returns an array of objects representing sections of the list. The
      * returned array and its contents should be non-null.
@@ -28,7 +45,7 @@ public interface EasySectionIndexer {
      *
      * @return the array of section objects
      */
-    Object[] getSections();
+    List<T> getSections();
 
     /**
      * Given the index of a section within the array of section objects, returns

@@ -41,9 +41,8 @@ public class EasyImageSection extends EasySection {
 
 
     public EasyImageSection(
-            @DrawableRes int resId,
-            @ImageType int imageType, String description, int defaultPosition) {
-        super(description);
+            @DrawableRes int resId, @ImageType int imageType, String letter, int defaultPosition) {
+        super(letter);
         this.resId = resId;
         this.imageType = imageType;
         this.defaultPosition = defaultPosition;
@@ -58,8 +57,8 @@ public class EasyImageSection extends EasySection {
 
     public EasyImageSection(
             @NonNull Drawable drawable,
-            @ImageType int imageType, String description, int defaultPosition) {
-        super(description);
+            @ImageType int imageType, String letter, int defaultPosition) {
+        super(letter);
         this.drawable = drawable;
         this.imageType = imageType;
         this.defaultPosition = defaultPosition;

@@ -6,5 +6,5 @@
 
     <color name="section_header_tv">#ff666666</color>
     <color name="section_header_tv_bg">#ffE8EDEE</color>
-    <color name="add_friend_name">#ff444444</color>
+    <color name="image_section_name_tv">#ff444444</color>
 </resources>

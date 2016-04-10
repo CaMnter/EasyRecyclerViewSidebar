@@ -167,7 +167,7 @@ public class EasyRecyclerViewSidebar extends View {
                     if (isPreviousImage) {
                         top += this.letterWidth;
                     }
-                    canvas.drawText(section.description, this.viewHalfWidth,
+                    canvas.drawText(section.letter, this.viewHalfWidth,
                             top + this.sectionHeight * i, this.letterPaint);
                     isPreviousImage = false;
                     isPreviousLetter = true;
