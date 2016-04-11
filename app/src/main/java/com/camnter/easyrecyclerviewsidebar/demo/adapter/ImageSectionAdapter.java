@@ -123,9 +123,10 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
             letter = contacts.getHeader();
             int section = this.easySections.size() == 0 ? 0 : this.easySections.size() - 1;
             if (contacts.top) {
-                this.easySections.add(
-                        new EasyImageSection(contacts.resId, EasyImageSection.CIRCLE, i));
                 if (i != 0) section++;
+                this.positionOfSection.put(section, i);
+                this.easySections.add(
+                        new EasyImageSection(contacts.resId, this.getEasyImageSection(), i));
             } else {
                 // A B C D E F ...
                 if (section < this.easySections.size()) {
@@ -143,7 +144,7 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
                             this.positionOfSection.put(section, i);
                         }
                     }
-                }else if(section == 0){
+                } else if (section == 0) {
                     this.easySections.add(new EasySection(letter));
                     this.positionOfSection.put(section, i);
                 }
@@ -151,6 +152,11 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
             this.sectionOfPosition.put(i, section);
         }
         return this.easySections;
+    }
+
+
+    public @EasyImageSection.ImageType int getEasyImageSection() {
+        return EasyImageSection.CIRCLE;
     }
 
 

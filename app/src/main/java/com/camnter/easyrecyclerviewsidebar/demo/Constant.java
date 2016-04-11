@@ -17,7 +17,8 @@ public class Constant {
     public static final Map<String, String> letter2Pinyin = new HashMap<>();
     public static final String[] letterArray = { "C", "D", "F", "H", "K", "P", "Q", "R", "U", "X" };
 
-    public static final List<Contacts> imageSectionList = new ArrayList<>();
+    public static final List<Contacts> circleImageSectionList = new ArrayList<>();
+    public static final List<Contacts> roundImageSectionList = new ArrayList<>();
     public static final List<Contacts> letterSectionList = new ArrayList<>();
 
 
@@ -82,9 +83,12 @@ public class Constant {
         ka.pinyin = letter2Pinyin.get("K");
         ka.resId = letter2ResId.get("K");
         ka.top = true;
-        imageSectionList.add(camnter);
-        imageSectionList.add(drakeet);
-        imageSectionList.add(ka);
+        circleImageSectionList.add(camnter);
+        circleImageSectionList.add(drakeet);
+        circleImageSectionList.add(ka);
+        roundImageSectionList.add(camnter);
+        roundImageSectionList.add(drakeet);
+        roundImageSectionList.add(ka);
         for (String letter : letterArray) {
             Contacts contacts = new Contacts();
             contacts.name = letter2Name.get(letter);
@@ -98,9 +102,12 @@ public class Constant {
             contacts2.name = letter + "linger";
             contacts2.pinyin = letter.toLowerCase() + "linger";
             contacts2.resId = 0;
-            imageSectionList.add(contacts);
-            imageSectionList.add(contacts1);
-            imageSectionList.add(contacts2);
+            circleImageSectionList.add(contacts);
+            circleImageSectionList.add(contacts1);
+            circleImageSectionList.add(contacts2);
+            roundImageSectionList.add(contacts);
+            roundImageSectionList.add(contacts1);
+            roundImageSectionList.add(contacts2);
             letterSectionList.add(contacts);
             letterSectionList.add(contacts1);
             letterSectionList.add(contacts2);

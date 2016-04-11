@@ -17,7 +17,10 @@
         </activity>
 
         <activity
-            android:name=".ImageSectionActivity"
+            android:name=".CircleImageSectionActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".RoundImageSectionActivity"
             android:screenOrientation="portrait"/>
     </application>
 

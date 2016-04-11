@@ -20,7 +20,6 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 import com.camnter.easyrecyclerviewsidebar.sections.EasyImageSection;
 import com.camnter.easyrecyclerviewsidebar.sections.EasySection;
 import java.util.ArrayList;
@@ -294,9 +293,11 @@ public class EasyRecyclerViewSidebar extends View {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.metrics);
     }
 
+
     private float dp2px(float dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.metrics);
     }
+
 
     private float sp2px(float sp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, this.metrics);
@@ -338,7 +339,7 @@ public class EasyRecyclerViewSidebar extends View {
     }
 
 
-    public void setFloatView(TextView floatView) {
+    public void setFloatView(View floatView) {
         this.floatView = floatView;
     }
 

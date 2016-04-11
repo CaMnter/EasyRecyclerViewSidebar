@@ -16,15 +16,30 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="center|end"/>
 
-    <TextView
-        android:id="@+id/image_section_floating_tv"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:layout_centerInParent="true"
+    <RelativeLayout
+        android:id="@+id/image_section_floating_rl"
         android:background="@drawable/show_float_bg"
-        android:gravity="center"
-        android:textColor="#444444"
-        android:textSize="23sp"
-        android:visibility="invisible"/>
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_width="70dp"
+        android:layout_height="60dp">
+
+        <com.camnter.easyrecyclerviewsidebar.EasyFloatingImageView
+            android:id="@+id/image_section_floating_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/image_section_floating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#ff444444"
+            android:textSize="23sp"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
