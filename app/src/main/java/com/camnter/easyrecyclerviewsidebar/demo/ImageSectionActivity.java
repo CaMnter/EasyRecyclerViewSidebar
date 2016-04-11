@@ -6,13 +6,16 @@ import android.widget.TextView;
 import com.camnter.easyrecyclerview.widget.EasyRecyclerView;
 import com.camnter.easyrecyclerviewsidebar.EasyRecyclerViewSidebar;
 import com.camnter.easyrecyclerviewsidebar.demo.adapter.ImageSectionAdapter;
+import com.camnter.easyrecyclerviewsidebar.sections.EasyImageSection;
+import com.camnter.easyrecyclerviewsidebar.sections.EasySection;
 
 /**
  * Description：ImageSectionActivity
  * Created by：CaMnter
  * Time：2016-04-10 20:23
  */
-public class ImageSectionActivity extends AppCompatActivity {
+public class ImageSectionActivity extends AppCompatActivity
+        implements EasyRecyclerViewSidebar.OnTouchSectionListener {
     private EasyRecyclerViewSidebar imageSidebar;
     private TextView imageFloatingTv;
 
@@ -35,6 +38,7 @@ public class ImageSectionActivity extends AppCompatActivity {
         this.imageSidebar = (EasyRecyclerViewSidebar) this.findViewById(R.id.image_section_sidebar);
         this.imageFloatingTv = (TextView) this.findViewById(R.id.image_section_floating_tv);
         this.imageSidebar.setFloatView(this.imageFloatingTv);
+        this.imageSidebar.setOnTouchSectionListener(this);
     }
 
 
@@ -42,19 +46,25 @@ public class ImageSectionActivity extends AppCompatActivity {
         this.adapter.setList(Constant.imageSectionList);
         this.adapter.notifyDataSetChanged();
         this.imageSidebar.setSections(this.adapter.getSections());
+    }
 
-        //String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
-        //List<EasySection> sections = new ArrayList<>();
-        //EasyImageSection imageSection1 = new EasyImageSection(R.drawable.ic_camnter,
-        //        EasyImageSection.ROUND, "CaMnter", 0);
-        //EasyImageSection imageSection2 = new EasyImageSection(R.drawable.ic_drakeet,
-        //        EasyImageSection.ROUND, "drakeet", 1);
-        //sections.add(imageSection1);
-        //sections.add(imageSection2);
-        //for (String letter : letters) {
-        //    EasySection section = new EasySection(letter);
-        //    sections.add(section);
-        //}
-        //this.imageSidebar.setSections(sections);
+
+    /**
+     * On touch image section
+     *
+     * @param sectionIndex sectionIndex
+     * @param imageSection imageSection
+     */
+    @Override public void onTouchImageSection(int sectionIndex, EasyImageSection imageSection) {
+    }
+
+
+    /**
+     * On touch letter section
+     *
+     * @param sectionIndex sectionIndex
+     * @param letterSection letterSection
+     */
+    @Override public void onTouchLetterSection(int sectionIndex, EasySection letterSection) {
     }
 }

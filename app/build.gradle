@@ -26,6 +26,6 @@ dependencies {
 
     compile 'com.camnter.easyrecyclerview:easyrecyclerview:1.2'
     // Glide
-    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile project(':easyrecyclerviewsidebar')
 }

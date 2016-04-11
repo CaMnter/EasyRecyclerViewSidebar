@@ -128,7 +128,7 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
                 if (i != 0) section++;
             } else {
                 // A B C D E F ...
-                if (section == 0 || this.easySections.get(section) != null) {
+                if (section < this.easySections.size()) {
                     EasySection easySection = this.easySections.get(section);
                     if (easySection instanceof EasyImageSection) {
                         // last section = image section
@@ -143,6 +143,9 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
                             this.positionOfSection.put(section, i);
                         }
                     }
+                }else if(section == 0){
+                    this.easySections.add(new EasySection(letter));
+                    this.positionOfSection.put(section, i);
                 }
             }
             this.sectionOfPosition.put(i, section);
