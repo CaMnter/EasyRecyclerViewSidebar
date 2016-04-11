@@ -29,7 +29,7 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="12dp"
-            android:src="@drawable/img_default_head_circle"/>
+            android:src="@drawable/img_default_head"/>
 
         <TextView
             android:id="@+id/image_section_name_tv"

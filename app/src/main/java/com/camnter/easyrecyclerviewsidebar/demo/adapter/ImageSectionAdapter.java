@@ -64,7 +64,7 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
         if (contacts.resId != 0) {
             GlideUtils.displayNative(sectionIv, contacts.resId);
         } else {
-            GlideUtils.displayNative(sectionIv, R.drawable.img_default_head_circle);
+            GlideUtils.displayNative(sectionIv, R.drawable.img_default_head);
         }
 
         // Header
@@ -124,7 +124,7 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
             int section = this.easySections.size() == 0 ? 0 : this.easySections.size() - 1;
             if (contacts.top) {
                 this.easySections.add(
-                        new EasyImageSection(contacts.resId, EasyImageSection.ROUND, i));
+                        new EasyImageSection(contacts.resId, EasyImageSection.CIRCLE, i));
                 if (i != 0) section++;
             } else {
                 // A B C D E F ...

@@ -41,7 +41,8 @@ public class EasyRecyclerViewSidebar extends View {
 
     private static final int MAX_SECTION_COUNT = 30;
 
-    private static final int DEFAULT_IMAGE_SECTION_BORDER_RADIUS = 6;
+    private static final int DEFAULT_IMAGE_SECTION_BORDER_RADIUS = 2;
+    private static final int DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS = 66;
 
     private Paint letterPaint;
     private Paint imagePaint;
@@ -50,13 +51,13 @@ public class EasyRecyclerViewSidebar extends View {
     private float sectionHeight;
     private float allSectionHeight;
     private float sectionFontSize;
-    private float letterWidth = 0;
+    private float letterSize = 0;
     private float letterHeight = 0;
 
     private Matrix imageSectionMatrix;
-    private float imageSectionRadius;
     private RectF imageSectionRect;
     protected float imageSectionBorderRadius;
+    protected float imageSectionCircleBorderRadius;
 
     private int viewWidth;
     private int viewHeight;
@@ -102,11 +103,12 @@ public class EasyRecyclerViewSidebar extends View {
         this.initPaints();
         float[] letterProperty = this.measureText(this.letterPaint,
                 DEFAULT_ONE_LETTER_MEASURE_WIDTH_CASE);
-        this.letterWidth = letterProperty[0];
+        this.letterSize = letterProperty[0];
         this.letterHeight = letterProperty[1];
-        this.imageSectionRadius = this.letterWidth / 2;
-        this.imageSectionRect = new RectF(0, 0, this.letterWidth, this.letterWidth);
+        this.imageSectionRect = new RectF(0, 0, this.letterSize, this.letterSize);
         this.imageSectionBorderRadius = this.dp2px(DEFAULT_IMAGE_SECTION_BORDER_RADIUS);
+        this.imageSectionCircleBorderRadius = this.dp2px(
+                DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS);
     }
 
 
@@ -140,23 +142,26 @@ public class EasyRecyclerViewSidebar extends View {
                 if (section instanceof EasyImageSection) {
                     EasyImageSection imageSection = (EasyImageSection) section;
                     this.setPaintShader(imageSection);
-                    canvas.save();
                     if (isPreviousLetter) {
-                        top -= this.letterWidth - (Math.max(this.letterHeight, this.sectionHeight) -
+                        top -= this.letterSize - (Math.max(this.letterHeight, this.sectionHeight) -
                                 Math.min(this.letterHeight, this.sectionHeight));
                     }
-                    canvas.translate(this.viewHalfWidth - this.letterWidth / 2,
-                            top + this.sectionHeight * i);
+                    canvas.save();
                     switch (imageSection.imageType) {
                         case EasyImageSection.ROUND: {
+                            canvas.translate(this.viewHalfWidth - this.letterSize / 2,
+                                    top + this.sectionHeight * i);
                             canvas.drawRoundRect(this.imageSectionRect,
                                     this.imageSectionBorderRadius, this.imageSectionBorderRadius,
                                     this.imagePaint);
                             break;
                         }
                         case EasyImageSection.CIRCLE: {
-                            canvas.drawCircle(this.viewHalfWidth, top + this.sectionHeight * i,
-                                    this.imageSectionRadius, this.imagePaint);
+                            canvas.translate(this.viewHalfWidth - this.letterSize / 2,
+                                    top + this.sectionHeight * i);
+                            canvas.drawRoundRect(this.imageSectionRect,
+                                    this.imageSectionCircleBorderRadius,
+                                    this.imageSectionCircleBorderRadius, this.imagePaint);
                             break;
                         }
                     }
@@ -165,7 +170,7 @@ public class EasyRecyclerViewSidebar extends View {
                     isPreviousLetter = false;
                 } else {
                     if (isPreviousImage) {
-                        top += this.letterWidth;
+                        top = top + this.letterSize;
                     }
                     canvas.drawText(section.letter, this.viewHalfWidth,
                             top + this.sectionHeight * i, this.letterPaint);
@@ -249,17 +254,8 @@ public class EasyRecyclerViewSidebar extends View {
         BitmapShader sectionBitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP,
                 Shader.TileMode.CLAMP);
         float scale = 1.0f;
-        switch (imageSection.imageType) {
-            case EasyImageSection.ROUND: {
-                scale = Math.max(this.letterWidth * 1.0f / bitmap.getWidth(),
-                        this.letterWidth * 1.0f / bitmap.getHeight());
-                break;
-            }
-            case EasyImageSection.CIRCLE: {
-                scale = this.letterWidth * 1.0f / Math.min(bitmap.getWidth(), bitmap.getHeight());
-                break;
-            }
-        }
+        scale = Math.max(this.letterSize * 1.0f / bitmap.getWidth(),
+                this.letterSize * 1.0f / bitmap.getHeight());
         this.imageSectionMatrix.setScale(scale, scale);
         sectionBitmapShader.setLocalMatrix(this.imageSectionMatrix);
         this.imagePaint.setShader(sectionBitmapShader);
