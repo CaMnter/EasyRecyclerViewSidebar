@@ -41,6 +41,7 @@ public class EasyRecyclerViewSidebar extends View {
 
     private static final int MAX_SECTION_COUNT = 30;
 
+    private static final float DEFAULT_IMAGE_SECTION_PAINT_WIDTH = 0.01f;
     private static final int DEFAULT_IMAGE_SECTION_BORDER_RADIUS = 2;
     private static final int DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS = 66;
 
@@ -121,6 +122,7 @@ public class EasyRecyclerViewSidebar extends View {
 
         this.imagePaint = new Paint();
         this.imagePaint.setAntiAlias(true);
+        this.imagePaint.setStrokeWidth(this.dp2px(DEFAULT_IMAGE_SECTION_PAINT_WIDTH));
     }
 
 
@@ -253,7 +255,7 @@ public class EasyRecyclerViewSidebar extends View {
         Bitmap bitmap = this.drawableToBitmap(drawable);
         BitmapShader sectionBitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP,
                 Shader.TileMode.CLAMP);
-        float scale = 1.0f;
+        float scale;
         scale = Math.max(this.letterSize * 1.0f / bitmap.getWidth(),
                 this.letterSize * 1.0f / bitmap.getHeight());
         this.imageSectionMatrix.setScale(scale, scale);
@@ -288,10 +290,13 @@ public class EasyRecyclerViewSidebar extends View {
     }
 
 
-    public float dp2px(int dp) {
+    private float dp2px(int dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.metrics);
     }
 
+    private float dp2px(float dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.metrics);
+    }
 
     private float sp2px(float sp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, this.metrics);
