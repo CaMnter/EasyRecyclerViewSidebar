@@ -30,7 +30,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 // #CONFIG# // project version
-version = "0.1"
+version = "1.0"
 // #CONFIG# // project homepage
 def siteUrl = 'https://github.com/camnter/EasyRecyclerViewSidebar'
 // #CONFIG# // project git
