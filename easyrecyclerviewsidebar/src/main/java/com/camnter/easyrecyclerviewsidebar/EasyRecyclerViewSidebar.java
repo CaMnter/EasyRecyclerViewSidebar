@@ -35,7 +35,7 @@ public class EasyRecyclerViewSidebar extends View {
     private static final String DEFAULT_ONE_LETTER_MEASURE_WIDTH_CASE = "M";
 
     private static final int DEFAULT_VIEW_BACKGROUND = 0x40000000;
-    private static final int DEFAULT_FONT_COLOR = 0xff444444;
+    private static final int DEFAULT_FONT_COLOR = 0xff555555;
     private static final int DEFAULT_FONT_SIZE = 14;
 
     private static final int MAX_SECTION_COUNT = 30;
@@ -43,25 +43,26 @@ public class EasyRecyclerViewSidebar extends View {
     private static final float DEFAULT_IMAGE_SECTION_PAINT_WIDTH = 0.01f;
     private static final int DEFAULT_IMAGE_SECTION_BORDER_RADIUS = 2;
     private static final int DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS = 66;
+    private static final boolean DEFAULT_ON_TOUCH_WRAP_DRAW_AREA = true;
 
     private Paint letterPaint;
     private Paint imagePaint;
 
     private View floatView;
     private float sectionHeight;
-    private float allSectionHeight;
     private float sectionFontSize;
     private float letterSize = 0;
     private float letterHeight = 0;
+
+    private boolean touchWrapArea;
 
     private Matrix imageSectionMatrix;
     private RectF imageSectionRect;
     protected float imageSectionBorderRadius;
     protected float imageSectionCircleBorderRadius;
 
-    private int viewWidth;
-    private int viewHeight;
-    private int viewHalfWidth;
+    private float drawBeginY;
+    private float drawEndY;
 
     private DisplayMetrics metrics;
 
@@ -96,19 +97,18 @@ public class EasyRecyclerViewSidebar extends View {
 
 
     private void init(Context context, AttributeSet attrs) {
-        this.metrics = this.getResources().getDisplayMetrics();
+        this.initOtherAttributes();
         this.sectionFontSize = this.sp2px(DEFAULT_FONT_SIZE);
+        this.touchWrapArea = DEFAULT_ON_TOUCH_WRAP_DRAW_AREA;
+        this.initPaints();
+        this.initLetterAndImageAttributes();
+    }
+
+
+    private void initOtherAttributes() {
+        this.metrics = this.getResources().getDisplayMetrics();
         this.sections = new ArrayList<>();
         this.imageSectionMatrix = new Matrix();
-        this.initPaints();
-        float[] letterProperty = this.measureText(this.letterPaint,
-                DEFAULT_ONE_LETTER_MEASURE_WIDTH_CASE);
-        this.letterSize = letterProperty[0];
-        this.letterHeight = letterProperty[1];
-        this.imageSectionRect = new RectF(0, 0, this.letterSize, this.letterSize);
-        this.imageSectionBorderRadius = this.dp2px(DEFAULT_IMAGE_SECTION_BORDER_RADIUS);
-        this.imageSectionCircleBorderRadius = this.dp2px(
-                DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS);
     }
 
 
@@ -125,18 +125,32 @@ public class EasyRecyclerViewSidebar extends View {
     }
 
 
+    private void initLetterAndImageAttributes() {
+        float[] letterProperty = this.measureText(this.letterPaint,
+                DEFAULT_ONE_LETTER_MEASURE_WIDTH_CASE);
+        this.letterSize = letterProperty[0];
+        this.letterHeight = letterProperty[1];
+        this.imageSectionRect = new RectF(0, 0, this.letterSize, this.letterSize);
+        this.imageSectionBorderRadius = this.dp2px(DEFAULT_IMAGE_SECTION_BORDER_RADIUS);
+        this.imageSectionCircleBorderRadius = this.dp2px(
+                DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS);
+    }
+
+
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.viewWidth = this.getWidth();
-        this.viewHeight = this.getHeight();
-        this.viewHalfWidth = this.viewWidth / 2;
-        this.sectionHeight = this.viewHeight / MAX_SECTION_COUNT;
+        int viewWidth = this.getWidth();
+        int viewHeight = this.getHeight();
+        int viewHalfWidth = viewWidth / 2;
+        this.sectionHeight = viewHeight / MAX_SECTION_COUNT;
         boolean isPreviousImage = false;
         boolean isPreviousLetter = false;
-
+        float allSectionHeight;
         if (this.sections.size() > 0) {
-            this.allSectionHeight = this.sectionHeight * this.sections.size();
-            float top = this.viewHeight / 2 - allSectionHeight / 2 + this.sectionHeight / 2 -
+            allSectionHeight = this.sectionHeight * this.sections.size();
+            this.drawBeginY = (viewHeight - allSectionHeight) / 2;
+            this.drawEndY = this.drawBeginY + allSectionHeight;
+            float top = viewHeight / 2 - allSectionHeight / 2 + this.sectionHeight / 2 -
                     this.sectionFontSize / 2;
             for (int i = 0; i < this.sections.size(); i++) {
                 EasySection section = this.sections.get(i);
@@ -148,18 +162,16 @@ public class EasyRecyclerViewSidebar extends View {
                                 Math.min(this.letterHeight, this.sectionHeight));
                     }
                     canvas.save();
+                    canvas.translate(viewHalfWidth - this.letterSize / 2,
+                            top + this.sectionHeight * i);
                     switch (imageSection.imageType) {
                         case EasyImageSection.ROUND: {
-                            canvas.translate(this.viewHalfWidth - this.letterSize / 2,
-                                    top + this.sectionHeight * i);
                             canvas.drawRoundRect(this.imageSectionRect,
                                     this.imageSectionBorderRadius, this.imageSectionBorderRadius,
                                     this.imagePaint);
                             break;
                         }
                         case EasyImageSection.CIRCLE: {
-                            canvas.translate(this.viewHalfWidth - this.letterSize / 2,
-                                    top + this.sectionHeight * i);
                             canvas.drawRoundRect(this.imageSectionRect,
                                     this.imageSectionCircleBorderRadius,
                                     this.imageSectionCircleBorderRadius, this.imagePaint);
@@ -173,58 +185,46 @@ public class EasyRecyclerViewSidebar extends View {
                     if (isPreviousImage) {
                         top = top + this.letterSize;
                     }
-                    canvas.drawText(section.letter, this.viewHalfWidth,
-                            top + this.sectionHeight * i, this.letterPaint);
+                    canvas.drawText(section.letter, viewHalfWidth, top + this.sectionHeight * i,
+                            this.letterPaint);
                     isPreviousImage = false;
                     isPreviousLetter = true;
                 }
             }
         } else {
             this.sectionHeight = 0;
-            this.allSectionHeight = 0;
         }
     }
 
 
     @Override public boolean onTouchEvent(MotionEvent event) {
         if (this.sections == null || this.sections.size() < 1) return super.onTouchEvent(event);
-        switch (event.getAction()) {
+        float eventY = event.getY();
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+            this.setBackgroundColor(Color.TRANSPARENT);
+            this.floatView.setVisibility(INVISIBLE);
+            return true;
+        }
+        if (this.touchWrapArea && eventY < this.drawBeginY || eventY > this.drawEndY) {
+            return super.onTouchEvent(event);
+        }
+        switch (action) {
             case MotionEvent.ACTION_DOWN:
                 this.setBackgroundColor(DEFAULT_VIEW_BACKGROUND);
                 this.floatView.setVisibility(VISIBLE);
-                this.showFloatView(event);
+                this.showFloatView(eventY);
                 return true;
             case MotionEvent.ACTION_MOVE:
-                this.showFloatView(event);
-                return true;
-            case MotionEvent.ACTION_UP:
-                this.setBackgroundColor(Color.TRANSPARENT);
-                this.floatView.setVisibility(INVISIBLE);
-                return true;
-            case MotionEvent.ACTION_CANCEL:
-                this.setBackgroundColor(Color.TRANSPARENT);
-                this.floatView.setVisibility(INVISIBLE);
+                this.showFloatView(eventY);
                 return true;
         }
         return super.onTouchEvent(event);
     }
 
 
-    private int getSectionIndex(float y) {
-        float currentY = y - (this.getHeight() - this.allSectionHeight) / 2;
-        int index = (int) (currentY / this.sectionHeight);
-        if (index <= 0) {
-            return 0;
-        }
-        if (index >= this.sections.size()) {
-            index = this.sections.size() - 1;
-        }
-        return index;
-    }
-
-
-    private void showFloatView(MotionEvent event) {
-        int sectionIndex = this.getSectionIndex(event.getY());
+    private void showFloatView(float eventY) {
+        int sectionIndex = this.getSectionIndex(eventY);
         if (this.sections == null || this.sections.size() < 1 ||
                 sectionIndex >= this.sections.size()) {
             return;
@@ -239,6 +239,19 @@ public class EasyRecyclerViewSidebar extends View {
         } else {
             this.onTouchSectionListener.onTouchLetterSection(sectionIndex, section);
         }
+    }
+
+
+    private int getSectionIndex(float eventY) {
+        float currentY = eventY - this.drawBeginY;
+        int index = (int) (currentY / this.sectionHeight);
+        if (index <= 0) {
+            return 0;
+        }
+        if (index >= this.sections.size()) {
+            index = this.sections.size() - 1;
+        }
+        return index;
     }
 
 

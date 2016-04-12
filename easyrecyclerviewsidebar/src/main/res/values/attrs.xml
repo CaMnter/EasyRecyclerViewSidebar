@@ -26,4 +26,12 @@
         <attr name="easyFloatingBorderRadius"
             format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="EasyRecyclerViewSidebar">
+        <attr name="easySidebarBackground"
+            format="color"/>
+        <attr name="easySidebarFontColor"
+            format="color"/>
+        <attr name="easySidebarTouchWrapArea"
+            format="boolean"/>
+    </declare-styleable>
 </resources>
