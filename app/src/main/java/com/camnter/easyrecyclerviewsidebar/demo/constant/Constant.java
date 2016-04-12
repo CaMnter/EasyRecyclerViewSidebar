@@ -1,5 +1,6 @@
-package com.camnter.easyrecyclerviewsidebar.demo;
+package com.camnter.easyrecyclerviewsidebar.demo.constant;
 
+import com.camnter.easyrecyclerviewsidebar.demo.R;
 import com.camnter.easyrecyclerviewsidebar.demo.bean.Contacts;
 import java.util.ArrayList;
 import java.util.HashMap;

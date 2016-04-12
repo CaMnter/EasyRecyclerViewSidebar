@@ -25,27 +25,27 @@
         android:background="@drawable/bg_image_section_item">
 
         <ImageView
-            android:id="@+id/image_section_iv"
+            android:id="@+id/section_iv"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_margin="12dp"
             android:src="@drawable/img_default_head"/>
 
         <TextView
-            android:id="@+id/image_section_name_tv"
+            android:id="@+id/section_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginBottom="2dp"
-            android:layout_toEndOf="@id/image_section_iv"
-            android:layout_toRightOf="@id/image_section_iv"
+            android:layout_toEndOf="@id/section_iv"
+            android:layout_toRightOf="@id/section_iv"
             android:textColor="@color/image_section_name_tv"
             android:textSize="@dimen/add_friend_name"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_below="@id/image_section_iv"
+            android:layout_below="@id/section_iv"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:background="#ffE5E5E5"/>

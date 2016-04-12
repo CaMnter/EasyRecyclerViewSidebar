@@ -2,6 +2,7 @@ package com.camnter.easyrecyclerviewsidebar;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -37,13 +38,16 @@ public class EasyRecyclerViewSidebar extends View {
     private static final int DEFAULT_VIEW_BACKGROUND = 0x40000000;
     private static final int DEFAULT_FONT_COLOR = 0xff555555;
     private static final int DEFAULT_FONT_SIZE = 14;
-
     private static final int MAX_SECTION_COUNT = 30;
 
     private static final float DEFAULT_IMAGE_SECTION_PAINT_WIDTH = 0.01f;
     private static final int DEFAULT_IMAGE_SECTION_BORDER_RADIUS = 2;
     private static final int DEFAULT_IMAGE_SECTION_CIRCLE_BORDER_RADIUS = 66;
     private static final boolean DEFAULT_ON_TOUCH_WRAP_DRAW_AREA = true;
+
+    private boolean touchWrapArea;
+    private int fontColor;
+    private int viewBackground;
 
     private Paint letterPaint;
     private Paint imagePaint;
@@ -53,8 +57,6 @@ public class EasyRecyclerViewSidebar extends View {
     private float sectionFontSize;
     private float letterSize = 0;
     private float letterHeight = 0;
-
-    private boolean touchWrapArea;
 
     private Matrix imageSectionMatrix;
     private RectF imageSectionRect;
@@ -97,11 +99,19 @@ public class EasyRecyclerViewSidebar extends View {
 
 
     private void init(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs,
+                R.styleable.EasyRecyclerViewSidebar);
+        this.fontColor = typedArray.getColor(
+                R.styleable.EasyRecyclerViewSidebar_easySidebarFontColor, DEFAULT_FONT_COLOR);
+        this.viewBackground = typedArray.getColor(
+                R.styleable.EasyRecyclerViewSidebar_easySidebarBackground, DEFAULT_VIEW_BACKGROUND);
+        this.touchWrapArea = typedArray.getBoolean(
+                R.styleable.EasyRecyclerViewSidebar_easySidebarTouchWrapArea,
+                DEFAULT_ON_TOUCH_WRAP_DRAW_AREA);
         this.initOtherAttributes();
-        this.sectionFontSize = this.sp2px(DEFAULT_FONT_SIZE);
-        this.touchWrapArea = DEFAULT_ON_TOUCH_WRAP_DRAW_AREA;
         this.initPaints();
         this.initLetterAndImageAttributes();
+        typedArray.recycle();
     }
 
 
@@ -113,10 +123,12 @@ public class EasyRecyclerViewSidebar extends View {
 
 
     private void initPaints() {
+        this.sectionFontSize = this.sp2px(DEFAULT_FONT_SIZE);
+
         this.letterPaint = new Paint();
         this.letterPaint.setAntiAlias(true);
         this.letterPaint.setTextAlign(Paint.Align.CENTER);
-        this.letterPaint.setColor(DEFAULT_FONT_COLOR);
+        this.letterPaint.setColor(this.fontColor);
         this.letterPaint.setTextSize(this.sectionFontSize);
 
         this.imagePaint = new Paint();
@@ -211,7 +223,7 @@ public class EasyRecyclerViewSidebar extends View {
         }
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                this.setBackgroundColor(DEFAULT_VIEW_BACKGROUND);
+                this.setBackgroundColor(this.viewBackground);
                 this.floatView.setVisibility(VISIBLE);
                 this.showFloatView(eventY);
                 return true;

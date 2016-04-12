@@ -17,6 +17,9 @@
         </activity>
 
         <activity
+            android:name=".LetterSectionActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".CircleImageSectionActivity"
             android:screenOrientation="portrait"/>
         <activity

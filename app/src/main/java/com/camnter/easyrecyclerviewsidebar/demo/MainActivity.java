@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         this.classes = new ArrayList<>();
-        this.classes.add(RoundImageSectionActivity.class);
+        this.classes.add(LetterSectionActivity.class);
         this.classes.add(CircleImageSectionActivity.class);
+        this.classes.add(RoundImageSectionActivity.class);
 
         this.mainAdapter = new MainAdapter();
         this.mainAdapter.setList(this.classes);

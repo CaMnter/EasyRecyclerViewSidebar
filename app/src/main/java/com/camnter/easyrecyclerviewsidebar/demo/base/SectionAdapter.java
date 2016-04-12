@@ -1,4 +1,4 @@
-package com.camnter.easyrecyclerviewsidebar.demo.adapter;
+package com.camnter.easyrecyclerviewsidebar.demo.base;
 
 import android.text.TextUtils;
 import android.util.SparseIntArray;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description：ImageSectionAdapter
+ * Description：SectionAdapter
  * Created by：CaMnter
  * Time：2016-04-10 20:41
  */
-public class ImageSectionAdapter extends EasyRecyclerViewAdapter
+public class SectionAdapter extends EasyRecyclerViewAdapter
         implements EasyRecyclerSectionIndexer<EasySection> {
 
     private SparseIntArray positionOfSection;
@@ -53,8 +53,8 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
         Contacts contacts = this.getItem(position);
         if (contacts == null) return;
         TextView headerTv = viewHolder.findViewById(R.id.section_header_tv);
-        ImageView sectionIv = viewHolder.findViewById(R.id.image_section_iv);
-        TextView nameTv = viewHolder.findViewById(R.id.image_section_name_tv);
+        ImageView sectionIv = viewHolder.findViewById(R.id.section_iv);
+        TextView nameTv = viewHolder.findViewById(R.id.section_name_tv);
 
         if (!TextUtils.isEmpty(contacts.name)) {
             nameTv.setText(contacts.name);
@@ -67,17 +67,20 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
             GlideUtils.displayNative(sectionIv, R.drawable.img_default_head);
         }
 
-        // Header
-        if (position != 0 && !contacts.top) {
-            Contacts pre = this.getItem(position - 1);
-            if (pre.top || !contacts.getHeader().equals(pre.getHeader())) {
-                this.setHeader(true, headerTv, contacts.getHeader());
-            } else {
-                this.setHeader(false, headerTv, null);
-            }
-        } else {
-            this.setHeader(false, headerTv, null);
-        }
+        this.setHeaderLogic(contacts, headerTv, viewHolder, position);
+    }
+
+
+    /**
+     * Set header logic
+     *
+     * @param contacts contacts
+     * @param headerTv headerTv
+     * @param viewHolder viewHolder
+     * @param position position
+     */
+    public void setHeaderLogic(Contacts contacts, TextView headerTv, EasyRecyclerViewHolder viewHolder, int position) {
+        // No implement
     }
 
 
@@ -95,7 +98,7 @@ public class ImageSectionAdapter extends EasyRecyclerViewAdapter
     }
 
 
-    private void setHeader(boolean visible, TextView headerTv, String header) {
+    public void setHeader(boolean visible, TextView headerTv, String header) {
         if (visible) {
             headerTv.setText(header);
             headerTv.setVisibility(View.VISIBLE);

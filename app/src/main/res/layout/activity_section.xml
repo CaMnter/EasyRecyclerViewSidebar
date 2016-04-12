@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
 
     <com.camnter.easyrecyclerview.widget.EasyRecyclerView
-        android:id="@+id/image_section_rv"
+        android:id="@+id/section_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.camnter.easyrecyclerviewsidebar.EasyRecyclerViewSidebar
-        android:id="@+id/image_section_sidebar"
+        android:id="@+id/section_sidebar"
         android:layout_width="30dp"
         android:layout_height="fill_parent"
         android:layout_alignParentEnd="true"
@@ -17,7 +17,7 @@
         android:layout_gravity="center|end"/>
 
     <RelativeLayout
-        android:id="@+id/image_section_floating_rl"
+        android:id="@+id/section_floating_rl"
         android:background="@drawable/show_float_bg"
         android:layout_centerInParent="true"
         android:visibility="invisible"
@@ -25,14 +25,14 @@
         android:layout_height="60dp">
 
         <com.camnter.easyrecyclerviewsidebar.EasyFloatingImageView
-            android:id="@+id/image_section_floating_iv"
+            android:id="@+id/section_floating_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:visibility="invisible"
             android:layout_centerInParent="true"/>
 
         <TextView
-            android:id="@+id/image_section_floating_tv"
+            android:id="@+id/section_floating_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
