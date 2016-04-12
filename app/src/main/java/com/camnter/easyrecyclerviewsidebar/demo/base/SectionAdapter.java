@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2016 CaMnter yuanyu.camnter@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.camnter.easyrecyclerviewsidebar.demo.base;
 
 import android.text.TextUtils;
@@ -7,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.camnter.easyrecyclerview.adapter.EasyRecyclerViewAdapter;
 import com.camnter.easyrecyclerview.holder.EasyRecyclerViewHolder;
-import com.camnter.easyrecyclerviewsidebar.EasyRecyclerSectionIndexer;
+import com.camnter.easyrecyclerviewsidebar.helper.EasyRecyclerSectionIndexer;
 import com.camnter.easyrecyclerviewsidebar.demo.R;
 import com.camnter.easyrecyclerviewsidebar.demo.bean.Contacts;
 import com.camnter.easyrecyclerviewsidebar.demo.utils.GlideUtils;
@@ -109,12 +124,7 @@ public class SectionAdapter extends EasyRecyclerViewAdapter
 
 
     @Override public List<EasySection> getSections() {
-        if (this.easySections == null) this.easySections = new ArrayList<>();
-        if (this.easySections.size() > 0) this.easySections.clear();
-        if (sectionOfPosition == null) this.sectionOfPosition = new SparseIntArray();
-        if (this.sectionOfPosition.size() > 0) this.sectionOfPosition.clear();
-        if (this.positionOfSection == null) this.positionOfSection = new SparseIntArray();
-        if (this.positionOfSection.size() > 0) this.positionOfSection.clear();
+        this.resetSectionCache();
 
         int itemCount = getItemCount();
         if (itemCount < 1) return this.easySections;
@@ -155,6 +165,16 @@ public class SectionAdapter extends EasyRecyclerViewAdapter
             this.sectionOfPosition.put(i, section);
         }
         return this.easySections;
+    }
+
+
+    private void resetSectionCache() {
+        if (this.easySections == null) this.easySections = new ArrayList<>();
+        if (this.easySections.size() > 0) this.easySections.clear();
+        if (sectionOfPosition == null) this.sectionOfPosition = new SparseIntArray();
+        if (this.sectionOfPosition.size() > 0) this.sectionOfPosition.clear();
+        if (this.positionOfSection == null) this.positionOfSection = new SparseIntArray();
+        if (this.positionOfSection.size() > 0) this.positionOfSection.clear();
     }
 
 

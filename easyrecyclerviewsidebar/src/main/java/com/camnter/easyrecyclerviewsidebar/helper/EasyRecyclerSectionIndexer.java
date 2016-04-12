@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.camnter.easyrecyclerviewsidebar;
+package com.camnter.easyrecyclerviewsidebar.helper;
 
 import com.camnter.easyrecyclerviewsidebar.sections.EasySection;
 import java.util.List;
