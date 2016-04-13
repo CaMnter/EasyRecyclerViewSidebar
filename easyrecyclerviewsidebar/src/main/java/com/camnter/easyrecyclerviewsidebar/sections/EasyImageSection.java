@@ -47,7 +47,22 @@ public class EasyImageSection extends EasySection {
 
     public int resId;
     public Drawable drawable;
+    public String url;
     public int defaultPosition;
+
+
+    public EasyImageSection(String url, @ImageType int imageType, int defaultPosition) {
+        this(url, imageType, null, defaultPosition);
+    }
+
+
+    public EasyImageSection(String url,
+                            @ImageType int imageType, String letter, int defaultPosition) {
+        super(letter);
+        this.url = url;
+        this.imageType = imageType;
+        this.defaultPosition = defaultPosition;
+    }
 
 
     public EasyImageSection(@DrawableRes int resId, @ImageType int imageType, int defaultPosition) {
