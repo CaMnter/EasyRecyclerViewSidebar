@@ -27,6 +27,7 @@ import com.camnter.easyrecyclerviewsidebar.sections.EasyImageSection;
  * Time：2016-04-11 23:57
  */
 public class CircleImageSectionAdapter extends SectionAdapter {
+
     @Override public int getEasyImageSection() {
         return EasyImageSection.CIRCLE;
     }

@@ -27,6 +27,7 @@ import java.util.List;
  * Time：2016-04-12 22:42
  */
 public class LetterSectionActivity extends SectionActivity {
+
     @Override public void setActivityTitle() {
         this.setTitle("LetterSectionActivity");
     }

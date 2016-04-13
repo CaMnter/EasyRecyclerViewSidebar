@@ -26,6 +26,7 @@ import com.camnter.easyrecyclerviewsidebar.demo.adapter.MainAdapter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
     private EasyRecyclerView mainRv;
     private MainAdapter mainAdapter;
     private ArrayList<Class> classes;

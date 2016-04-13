@@ -26,6 +26,7 @@ import com.camnter.easyrecyclerviewsidebar.demo.bean.Contacts;
  * Time：2016-04-12 23:00
  */
 public class LetterSectionAdapter extends SectionAdapter {
+
     /**
      * Set header logic
      *

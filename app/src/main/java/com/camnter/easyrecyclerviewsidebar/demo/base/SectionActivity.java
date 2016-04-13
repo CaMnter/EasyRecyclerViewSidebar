@@ -39,6 +39,7 @@ import java.util.List;
  */
 public class SectionActivity extends AppCompatActivity
         implements EasyRecyclerViewSidebar.OnTouchSectionListener {
+
     private EasyRecyclerViewSidebar imageSidebar;
     private TextView imageFloatingTv;
     private EasyFloatingImageView imageFloatingIv;

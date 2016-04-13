@@ -28,6 +28,7 @@ import java.util.Map;
  * Time：2016-04-10 21:28
  */
 public class Constant {
+
     public static final Map<String, Integer> letter2ResId = new HashMap<>();
     public static final Map<String, String> letter2Name = new HashMap<>();
     public static final Map<String, String> letter2Pinyin = new HashMap<>();

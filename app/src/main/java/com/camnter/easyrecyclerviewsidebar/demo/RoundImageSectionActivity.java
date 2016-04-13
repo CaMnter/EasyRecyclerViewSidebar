@@ -27,6 +27,7 @@ import java.util.List;
  * Time：2016-04-12 00:02
  */
 public class RoundImageSectionActivity extends SectionActivity {
+
     @Override public void setActivityTitle() {
         this.setTitle("RoundImageSectionActivity");
     }

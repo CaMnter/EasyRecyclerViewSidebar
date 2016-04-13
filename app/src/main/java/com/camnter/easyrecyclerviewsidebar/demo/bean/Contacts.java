@@ -23,6 +23,7 @@ import android.text.TextUtils;
  * Time：2016-04-10 21:05
  */
 public class Contacts {
+
     public int resId;
     public String name;
     public String pinyin;
