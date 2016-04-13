@@ -41,7 +41,7 @@ You must implement the **EasyRecyclerViewSidebar.OnTouchSectionListener** .
 - In onTouchImageSection , using the EasyImageSection rendering images for **You floating view** .
 - In onTouchLetterSection using the EasySection set letter for **You floating view** . 
 
-**Also , you can see the SectionActivity of demo . **
+**Also , you can see the SectionActivity of demo .**
 
 ```java
 public interface OnTouchSectionListener {
