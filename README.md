@@ -126,9 +126,68 @@ More details, you can see the xml of demo
 </declare-styleable>
 ```
 
+`setSections`
+
+```java
+private void initData() {
+    this.adapter.setList(this.getData());
+    this.adapter.notifyDataSetChanged();
+    this.imageSidebar.setSections(this.adapter.getSections());
+}
+```
+
+**A sample implement of getSections**
+
+```java
+@Override public List<EasySection> getSections() {
+    this.resetSectionCache();
+
+    int itemCount = getItemCount();
+    if (itemCount < 1) return this.easySections;
+
+    String letter;
+
+    for (int i = 0; i < itemCount; i++) {
+        Contacts contacts = this.getItem(i);
+        letter = contacts.getHeader();
+        int section = this.easySections.size() == 0 ? 0 : this.easySections.size() - 1;
+        if (contacts.top) {
+            if (i != 0) section++;
+            this.positionOfSection.put(section, i);
+            this.easySections.add(
+                    new EasyImageSection(contacts.resId, this.getEasyImageSection(), i));
+        } else {
+            // A B C D E F ...
+            if (section < this.easySections.size()) {
+                EasySection easySection = this.easySections.get(section);
+                if (easySection instanceof EasyImageSection) {
+                    // last section = image section
+                    this.easySections.add(new EasySection(letter));
+                    section++;
+                    this.positionOfSection.put(section, i);
+                } else {
+                    // last section = letter section
+                    if (!this.easySections.get(section).letter.equals(letter)) {
+                        this.easySections.add(new EasySection(letter));
+                        section++;
+                        this.positionOfSection.put(section, i);
+                    }
+                }
+            } else if (section == 0) {
+                this.easySections.add(new EasySection(letter));
+                this.positionOfSection.put(section, i);
+            }
+        }
+        this.sectionOfPosition.put(i, section);
+    }
+    return this.easySections;
+}
+```
+
+
 ##ScreenShots
 
-<img src="http://ww3.sinaimg.cn/large/006lPEc9gw1f2w2l03y3xg31401z4b2a.gif" width="320x">   
+<img src="https://github.com/CaMnter/EasyRecyclerViewSidebar/raw/master/screenshot/EasyRecyclerViewSidebar.gif" width="320x">   
 
 |    Style   |     Circle    |      Round     |
 | :--------: | :-----------: | :------------: |
