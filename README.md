@@ -187,7 +187,7 @@ private void initData() {
 
 ##ScreenShots
 
-<img src="https://github.com/CaMnter/EasyRecyclerViewSidebar/raw/master/screenshot/EasyRecyclerViewSidebar.gif" width="320x">   
+<img src="https://github.com/CaMnter/EasyRecyclerViewSidebar/raw/master/screenshots/EasyRecyclerViewSidebar.gif" width="320x">   
 
 |    Style   |     Circle    |      Round     |
 | :--------: | :-----------: | :------------: |
