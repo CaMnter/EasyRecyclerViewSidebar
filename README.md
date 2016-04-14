@@ -128,7 +128,7 @@ More details, you can see the xml of demo
 
 ##ScreenShots
 
-<img src="http://ww4.sinaimg.cn/large/006lPEc9jw1f2vh6s7sjog31401z44qr.gif" width="320x">   
+<img src="http://ww3.sinaimg.cn/large/006lPEc9gw1f2w2l03y3xg31401z4b2a.gif" width="320x">   
 
 |    Style   |     Circle    |      Round     |
 | :--------: | :-----------: | :------------: |
