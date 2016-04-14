@@ -126,7 +126,7 @@ More details, you can see the xml of demo
 </declare-styleable>
 ```
 
-`setSections`
+**setSections**
 
 ```java
 private void initData() {
