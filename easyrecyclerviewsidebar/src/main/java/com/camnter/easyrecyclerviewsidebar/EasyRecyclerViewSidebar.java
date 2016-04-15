@@ -33,6 +33,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -65,7 +66,7 @@ public class EasyRecyclerViewSidebar extends View {
     private int viewBackground;
 
     private Paint letterPaint;
-    private Paint imagePaint;
+    private SparseArray<Paint> imagePaints = new SparseArray<>();
 
     private View floatView;
     private float sectionHeight;
@@ -145,10 +146,6 @@ public class EasyRecyclerViewSidebar extends View {
         this.letterPaint.setTextAlign(Paint.Align.CENTER);
         this.letterPaint.setColor(this.fontColor);
         this.letterPaint.setTextSize(this.sectionFontSize);
-
-        this.imagePaint = new Paint();
-        this.imagePaint.setAntiAlias(true);
-        this.imagePaint.setStrokeWidth(this.dp2px(DEFAULT_IMAGE_SECTION_PAINT_WIDTH));
     }
 
 
@@ -191,17 +188,18 @@ public class EasyRecyclerViewSidebar extends View {
                     canvas.save();
                     canvas.translate(viewHalfWidth - this.letterSize / 2,
                             top + this.sectionHeight * i);
+                    Paint imagePaint = this.imagePaints.get(imageSection.hashCode());
                     switch (imageSection.imageType) {
                         case EasyImageSection.ROUND: {
                             canvas.drawRoundRect(this.imageSectionRect,
                                     this.imageSectionBorderRadius, this.imageSectionBorderRadius,
-                                    this.imagePaint);
+                                    imagePaint);
                             break;
                         }
                         case EasyImageSection.CIRCLE: {
                             canvas.drawRoundRect(this.imageSectionRect,
                                     this.imageSectionCircleBorderRadius,
-                                    this.imageSectionCircleBorderRadius, this.imagePaint);
+                                    this.imageSectionCircleBorderRadius, imagePaint);
                             break;
                         }
                     }
@@ -299,7 +297,8 @@ public class EasyRecyclerViewSidebar extends View {
                 this.letterSize * 1.0f / bitmap.getHeight());
         this.imageSectionMatrix.setScale(scale, scale);
         sectionBitmapShader.setLocalMatrix(this.imageSectionMatrix);
-        this.imagePaint.setShader(sectionBitmapShader);
+        Paint imagePaint = this.imagePaints.get(imageSection.hashCode());
+        imagePaint.setShader(sectionBitmapShader);
     }
 
 
@@ -356,7 +355,22 @@ public class EasyRecyclerViewSidebar extends View {
     public void setSections(List<EasySection> sections) {
         this.sections.clear();
         this.sections.addAll(sections);
+        this.imagePaints.clear();
+        for (EasySection section : this.sections) {
+            if (section instanceof EasyImageSection) {
+                Paint paint = this.createImagePaint();
+                this.imagePaints.put(section.hashCode(), paint);
+            }
+        }
         this.invalidate();
+    }
+
+
+    private Paint createImagePaint() {
+        Paint imagePaint = new Paint();
+        imagePaint.setAntiAlias(true);
+        imagePaint.setStrokeWidth(this.dp2px(DEFAULT_IMAGE_SECTION_PAINT_WIDTH));
+        return imagePaint;
     }
 
 
