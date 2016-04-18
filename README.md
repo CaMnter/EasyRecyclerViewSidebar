@@ -10,9 +10,9 @@
 
 ##Introduction
 
-EasyRecyclerViewSidebar is more convenient sidebar index column .  
+EasyRecyclerViewSidebar is a more convenient sidebar index column.  
 
-**Not only can load letter, you can also load pictures.**
+**Not only can you load text, you can also load pictures.**
 
 You can also customize the floating View.
 
@@ -38,8 +38,8 @@ dependencies {
 
 You must implement the **EasyRecyclerViewSidebar.OnTouchSectionListener** .
 
-- In onTouchImageSection , using the EasyImageSection rendering images for **You floating view** .
-- In onTouchLetterSection using the EasySection set letter for **You floating view** . 
+- In onTouchImageSection, using the EasyImageSection rendering images for **You floating view** .
+- In onTouchLetterSection, using the EasySection set letter for **You floating view** . 
 
 **Also , you can see the SectionActivity of demo .**
 
@@ -65,7 +65,7 @@ public interface OnTouchSectionListener {
 
 ## Easy to use
 
-More details, you can see the xml of demo 
+More details, you can see the xml of a demo 
 
 ```xml
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -136,7 +136,7 @@ private void initData() {
 }
 ```
 
-**A sample implement of getSections**
+**A sample implementation of getSections**
 
 ```java
 @Override public List<EasySection> getSections() {
@@ -185,7 +185,7 @@ private void initData() {
 ```
 
 
-##ScreenShots
+##Screenshots
 
 <img src="https://github.com/CaMnter/EasyRecyclerViewSidebar/raw/master/screenshots/EasyRecyclerViewSidebar.gif" width="320x">   
 
