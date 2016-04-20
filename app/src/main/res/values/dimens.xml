@@ -20,6 +20,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="add_friend_name">16sp</dimen>
-    <dimen name="add_friend_by_contacts_header_tv">13sp</dimen>
+    <dimen name="section_name_tv">16sp</dimen>
+    <dimen name="section_header_tv">13sp</dimen>
 </resources>

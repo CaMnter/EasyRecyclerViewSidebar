@@ -23,7 +23,7 @@ import com.camnter.easyrecyclerviewsidebar.demo.R;
 /**
  * Description：MainAdapter
  * Created by：CaMnter
- * Time：2016-03-18 13:21
+ * Time：2016-04-12 13:21
  */
 public class MainAdapter extends EasyRecyclerViewAdapter {
 

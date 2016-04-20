@@ -32,7 +32,7 @@
         android:paddingStart="12dp"
         android:paddingTop="4dp"
         android:textColor="@color/section_header_tv"
-        android:textSize="@dimen/add_friend_by_contacts_header_tv"
+        android:textSize="@dimen/section_header_tv"
         android:visibility="gone"/>
 
     <RelativeLayout
@@ -56,7 +56,7 @@
             android:layout_toEndOf="@id/section_iv"
             android:layout_toRightOf="@id/section_iv"
             android:textColor="@color/image_section_name_tv"
-            android:textSize="@dimen/add_friend_name"/>
+            android:textSize="@dimen/section_name_tv"/>
 
         <View
             android:layout_width="match_parent"
