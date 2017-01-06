@@ -1,5 +1,7 @@
 #EasyRecyclerViewSidebar
 
+<br>
+
 **Easy sidebar for Android RecyclerView (｡>﹏<｡)**
 
 ![Language](https://img.shields.io/badge/language-Java-EE0000.svg) [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/CaMnter/EasyRecyclerViewSidebar/blob/master/LICENSE) 
@@ -7,6 +9,8 @@
 ![SDK](https://img.shields.io/badge/SDK-9%2B-orange.svg)
 [ ![Download](https://api.bintray.com/packages/camnter/maven/EasyRecyclerViewSidebar/images/download.svg) ](https://bintray.com/camnter/maven/EasyRecyclerViewSidebar/_latestVersion)
 
+<br>
+<br>
 
 ##Introduction
 
@@ -16,6 +20,9 @@ EasyRecyclerViewSidebar is a more convenient sidebar index column.
 
 You can also customize the floating View.
 
+<br>
+<br>
+
 ## Gradle
 
 ```groovy
@@ -23,6 +30,9 @@ dependencies {
 	compile 'com.camnter.easyrecyclerviewsidebar:easyrecyclerviewsidebar:1.3'
 }
 ```
+
+<br>
+<br>
 
 ## Attributes
 
@@ -33,6 +43,9 @@ dependencies {
     <attr name="easySidebarTouchWrapArea" format="boolean" />
 </declare-styleable>
 ```
+
+<br>
+<br>
 
 ##Listener
 
@@ -62,6 +75,9 @@ public interface OnTouchSectionListener {
     void onTouchLetterSection(int sectionIndex, EasySection letterSection);
 }
 ```
+
+<br>
+<br>
 
 ## Easy to use
 
@@ -114,6 +130,8 @@ More details, you can see the xml of a demo
 </RelativeLayout>
 ```
 
+<br>
+
 **EasyFloatingImageView Attributes**
 
 ```xml
@@ -126,6 +144,8 @@ More details, you can see the xml of a demo
 </declare-styleable>
 ```
 
+<br>
+
 **setSections**
 
 ```java
@@ -135,6 +155,8 @@ private void initData() {
     this.imageSidebar.setSections(this.adapter.getSections());
 }
 ```
+
+<br>
 
 **A sample implementation of getSections**
 
@@ -184,6 +206,8 @@ private void initData() {
 }
 ```
 
+<br>
+<br>
 
 ##Screenshots
 
@@ -192,11 +216,15 @@ private void initData() {
 |    Style   |     Circle    |      Round     |
 | :--------: | :-----------: | :------------: |
 | | <img src="http://ww1.sinaimg.cn/large/006lPEc9gw1f30v88098fj31ay298aj3.jpg" width="420x">             |  <img src="http://ww4.sinaimg.cn/large/006lPEc9gw1f30vb9mxvzj31ay298k0g.jpg" width="420x">             |  
+
+<br>
   
 **No Images**  
 
 <img src="http://ww1.sinaimg.cn/large/006lPEc9gw1f30v33qsedj31ay298wmn.jpg" width="420x">
 
+<br>
+<br>
 
 ## License
 
